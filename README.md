@@ -8,6 +8,7 @@ docker-compose up -d --build
 ```bash
 cd tests
 ```
+- Before running the Python file to test the API, you must change the URL in the file to match your IP address.
 ```bash 
 python test_api_emotion.py
 python test_api_question.py
