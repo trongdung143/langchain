@@ -1,0 +1,31 @@
+services:
+  ai_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai_api
+    image: ai-myapi:latest    
+    environment:
+      - PYTHONUNBUFFERED=1   
+    expose:
+      - "8000"
+    volumes:
+      - .:/app
+    networks:
+      - rag_net
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - ai_api
+    networks:
+      - rag_net
+
+networks:
+  rag_net:
+    driver: bridge

@@ -1,0 +1,14 @@
+langchain 
+faiss-cpu
+langchain-community 
+fastapi
+uvicorn
+pymupdf
+langchain_huggingface
+langchain_together
+python-dotenv
+tf-keras
+pypdf
+pydantic
+langchain-openai
+tiktoken  
