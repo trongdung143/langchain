@@ -5,7 +5,7 @@ from langchain.text_splitter import (
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_huggingface import HuggingFaceEmbeddings
-import sys
+import sys, os
 
 vector_db_path = None
 pdf_data_path = None
@@ -44,8 +44,11 @@ def create_vector_db_from_file() -> FAISS:
     return db
 
 
-for i in range(1, int(sys.argv[2]) + 1):
-    pdf_data_path = f"./data/courses/{sys.argv[1]}/{i}.pdf"
-    vector_db_path = f"./data/vectorstores/{sys.argv[1]}/{i}"
+folder_path = f"./data/courses/{sys.argv[1]}"
+pdf_files = [f for f in os.listdir(folder_path) if f.lower()]
+
+for file in pdf_files:
+    pdf_data_path = f"./data/courses/{sys.argv[1]}/{file}"
+    vector_db_path = f"./data/vectorstores/{sys.argv[1]}/{file[:-4]}"
     create_vector_db_from_file()
-    print(f"Vector DB created successfully for file {i}.pdf")
+    print(f"Vector DB created successfully for file {file}")
